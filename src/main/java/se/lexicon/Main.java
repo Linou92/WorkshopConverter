@@ -1,10 +1,22 @@
 package se.lexicon;
 
+import static se.lexicon.InputValidator.readMenuChoice;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
 
-    private static void printMenu() {
+    /*private static int readMenuChoice(String prompt, int min, int max) {
+        while (true) {
+            int choice = ConverterApp.readInt(prompt);
+            if (choice >= min && choice <= max) {
+                return choice;
+            }
+            IO.println("❌ Invalid choice. Please enter a number between " + min + " and " + max + ".");
+        }
+    }*/
+
+    /*private static void printMenu() {
         IO.println("""
                         ==================================
                               LEXICON CONVERTER APP
@@ -22,7 +34,7 @@ public class Main {
                         11. Exit
                         ==================================
                        """);
-    }
+    }*/
 
     static void main() {
 
@@ -30,21 +42,21 @@ public class Main {
 
         while (running){
 
-            printMenu();
-            int choice = Integer.parseInt(IO.readln("Choose an option: "));
+            ConsoleUI.printMenu();
+            int choice = InputValidator.readMenuChoice("Choose an option: ",1, 11);
 
             switch (choice) {
 
-                case 1 -> ConverterApp.currencyConverter();
-                case 2 -> ConverterApp.temperatureConverter();
-                case 3 -> ConverterApp.lengthConverter();
-                case 4 -> ConverterApp.weightConverter();
-                case 5 -> ConverterApp.timeConverter();
-                case 6 -> ConverterApp.speedConverter();
-                case 7 -> ConverterApp.dataStorageConverter();
-                case 8 -> ConverterApp.bmiCalculator();
-                case 9 -> ConverterApp.fuelConsumptionConverter();
-                case 10 -> ConverterApp.gradeConverter();
+                case 1 -> ConsoleUI.currencyConverter();
+                case 2 -> ConsoleUI.temperatureConverter();
+                case 3 -> ConsoleUI.lengthConverter();
+                case 4 -> ConsoleUI.weightConverter();
+                case 5 -> ConsoleUI.timeConverter();
+                case 6 -> ConsoleUI.speedConverter();
+                case 7 -> ConsoleUI.dataStorageConverter();
+                case 8 -> ConsoleUI.bmiCalculator();
+                case 9 -> ConsoleUI.fuelConsumptionConverter();
+                case 10 -> ConsoleUI.gradeConverter();
                 case 11 -> {
                     IO.println("Goodbye!");
                     running = false;
