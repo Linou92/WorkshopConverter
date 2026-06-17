@@ -14,6 +14,7 @@ public class Main {
                 String answer = IO.readln("\nContinue? (yes/no): ");
 
                 if (!answer.equalsIgnoreCase("yes")) {
+                    ConsoleUI.printHistory();
                     IO.println("Goodbye!");
                     break;
                 }
