@@ -1,11 +1,15 @@
 package se.lexicon;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleUI {
 
     static final List<String> HISTORY = new ArrayList<>();
+    static final DateTimeFormatter FORMATTER =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     static final List<MenuItem> MENU_ITEMS =
             List.of(
@@ -15,7 +19,7 @@ public class ConsoleUI {
                                             "SEK to USD",
                                             () -> {
                                                 double sek = InputValidator.readPositiveDouble("Enter amount in SEK: ", "Amount");
-                                                String output = String.format("Result: %.2f SEK = %.2f USD%n", sek, ConverterApp.sekToUsd(sek));
+                                                String output = String.format("Result: %.2f SEK = %.2f USD%nConverted at: %s", sek, ConverterApp.sekToUsd(sek), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -24,7 +28,7 @@ public class ConsoleUI {
                                             "SEK to EUR",
                                             () -> {
                                                 double sek = InputValidator.readPositiveDouble("Enter amount in SEK: ", "Amount");
-                                                String output = String.format("Result: %.2f SEK = %.2f EUR%n", sek, ConverterApp.sekToEur(sek));
+                                                String output = String.format("Result: %.2f SEK = %.2f EUR%nConverted at: %s", sek, ConverterApp.sekToEur(sek), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -41,7 +45,7 @@ public class ConsoleUI {
                                                         Double.MAX_VALUE,
                                                         "Invalid value. Temperature cannot be below absolute zero (-273.15 C)."
                                                 );
-                                                String output = String.format("Result: %.2f C = %.2f F%n", celsius, ConverterApp.celsiusToFahrenheit(celsius));
+                                                String output = String.format("Result: %.2f C = %.2f F%nConverted at: %s", celsius, ConverterApp.celsiusToFahrenheit(celsius), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -55,7 +59,7 @@ public class ConsoleUI {
                                                         Double.MAX_VALUE,
                                                         "Invalid value. Temperature cannot be below absolute zero (-459.67 F)."
                                                 );
-                                                String output = String.format("Result: %.2f F = %.2f C%n", fahrenheit, ConverterApp.fahrenheitToCelsius(fahrenheit));
+                                                String output = String.format("Result: %.2f F = %.2f C%nConverted at: %s", fahrenheit, ConverterApp.fahrenheitToCelsius(fahrenheit), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -67,9 +71,9 @@ public class ConsoleUI {
                                             "Centimeters to Meters",
                                             () -> {
                                                 double cm = InputValidator.readPositiveDouble("Enter length in cm: ", "Length");
-                                                String output = String.format("Result: %.2f cm = %.2f m%n",
+                                                String output = String.format("Result: %.2f cm = %.2f m%nConverted at: %s",
                                                         cm,
-                                                        ConverterApp.centimetersToMeters(cm));
+                                                        ConverterApp.centimetersToMeters(cm), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -78,9 +82,9 @@ public class ConsoleUI {
                                             "Meters to Kilometers",
                                             () -> {
                                                 double m = InputValidator.readPositiveDouble("Enter length in m: ", "Length");
-                                                String output = String.format("Result: %.2f m = %.2f km%n",
+                                                String output = String.format("Result: %.2f m = %.2f km%nConverted at: %s",
                                                         m,
-                                                        ConverterApp.metersToKilometers(m));
+                                                        ConverterApp.metersToKilometers(m), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -92,9 +96,9 @@ public class ConsoleUI {
                                             "Kilograms to Grams",
                                             () -> {
                                                 double kg = InputValidator.readPositiveDouble("Enter weight in kg: ", "Weight");
-                                                String output = String.format("Result: %.2f kg = %.2f g%n",
+                                                String output = String.format("Result: %.2f kg = %.2f g%nConverted at: %s",
                                                         kg,
-                                                        ConverterApp.kilogramsToGrams(kg));
+                                                        ConverterApp.kilogramsToGrams(kg), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -103,9 +107,9 @@ public class ConsoleUI {
                                             "Kilograms to Pounds",
                                             () -> {
                                                 double kg = InputValidator.readPositiveDouble("Enter weight in kg: ", "Weight");
-                                                String output = String.format("Result: %.2f kg = %.2f lb%n",
+                                                String output = String.format("Result: %.2f kg = %.2f lb%nConverted at: %s",
                                                         kg,
-                                                        ConverterApp.kilogramsToPounds(kg));
+                                                        ConverterApp.kilogramsToPounds(kg), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -117,9 +121,9 @@ public class ConsoleUI {
                                             "Hours to Minutes",
                                             () -> {
                                                 double h = InputValidator.readPositiveDouble("Enter time in hours: ", "Time");
-                                                String output = String.format("Result: %.2f h = %.2f min%n",
+                                                String output = String.format("Result: %.2f h = %.2f min%nConverted at: %s",
                                                         h,
-                                                        ConverterApp.hoursToMinutes(h));
+                                                        ConverterApp.hoursToMinutes(h), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -128,9 +132,9 @@ public class ConsoleUI {
                                             "Minutes to Seconds",
                                             () -> {
                                                 double min = InputValidator.readPositiveDouble("Enter time in min: ", "Time");
-                                                String output = String.format("Result: %.2f min = %.2f sec%n",
+                                                String output = String.format("Result: %.2f min = %.2f sec%nConverted at: %s",
                                                         min,
-                                                        ConverterApp.minutesToSeconds(min));
+                                                        ConverterApp.minutesToSeconds(min), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -142,9 +146,9 @@ public class ConsoleUI {
                                             "km/h to m/s",
                                             () -> {
                                                 double kmh = InputValidator.readPositiveDouble("Enter speed in km/h: ", "Speed");
-                                                String output = String.format("Result: %.2f km/h = %.2f m/s%n",
+                                                String output = String.format("Result: %.2f km/h = %.2f m/s%nConverted at: %s",
                                                         kmh,
-                                                        ConverterApp.kmhToMs(kmh));
+                                                        ConverterApp.kmhToMs(kmh), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -153,9 +157,9 @@ public class ConsoleUI {
                                             "m/s to km/h",
                                             () -> {
                                                 double ms = InputValidator.readPositiveDouble("Enter speed in m/s: ", "Speed");
-                                                String output = String.format("Result: %.2f m/s = %.2f km/h%n",
+                                                String output = String.format("Result: %.2f m/s = %.2f km/h%nConverted at: %s",
                                                         ms,
-                                                        ConverterApp.msToKmh(ms));
+                                                        ConverterApp.msToKmh(ms), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -167,9 +171,9 @@ public class ConsoleUI {
                                             "Kilobytes to Megabytes",
                                             () -> {
                                                 double kb = InputValidator.readPositiveDouble("Enter storage in KB: ", "Storage");
-                                                String output = String.format("Result: %.2f KB = %.2f MB%n",
+                                                String output = String.format("Result: %.2f KB = %.2f MB%nConverted at: %s",
                                                         kb,
-                                                        ConverterApp.kbToMb(kb));
+                                                        ConverterApp.kbToMb(kb), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -178,9 +182,9 @@ public class ConsoleUI {
                                             "Megabytes to Gigabytes",
                                             () -> {
                                                 double mb = InputValidator.readPositiveDouble("Enter storage in MB: ", "Storage");
-                                                String output = String.format("Result: %.2f MB = %.2f GB%n",
+                                                String output = String.format("Result: %.2f MB = %.2f GB%nConverted at: %s",
                                                         mb,
-                                                        ConverterApp.mbToGb(mb));
+                                                        ConverterApp.mbToGb(mb), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -191,9 +195,9 @@ public class ConsoleUI {
                                             double weight = InputValidator.readPositiveDouble("Enter weight in kg: ", "Weight");
                                             double height = InputValidator.readPositiveDouble("Enter height in meters: ", "Height");
                                             double bmi = ConverterApp.calculateBmi(height, weight);
-                                            String output = String.format("BMI: %.2f -> %s",
+                                            String output = String.format("BMI: %.2f -> %s%nConverted at: %s",
                                                         bmi,
-                                                        ConverterApp.bmiCategory(bmi));
+                                                        ConverterApp.bmiCategory(bmi), timestamp());
                                             IO.println(output);
                                             addHistory(output);
                                             }
@@ -204,9 +208,9 @@ public class ConsoleUI {
                                             "L/100km to km/L",
                                             () -> {
                                                 double L_KM = InputValidator.readPositiveDouble("Enter fuel in L/100km: ", "Fuel");
-                                                String output = String.format("Result: %.2f L/100km = %.2f Km/L%n",
+                                                String output = String.format("Result: %.2f L/100km = %.2f Km/L%nConverted at: %s",
                                                         L_KM,
-                                                        ConverterApp.litresPer100KnToKmPerLitre(L_KM));
+                                                        ConverterApp.litresPer100KnToKmPerLitre(L_KM), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -215,9 +219,9 @@ public class ConsoleUI {
                                             "km/L to L/100km",
                                             () -> {
                                                 double KM_L = InputValidator.readPositiveDouble("Enter fuel in km/L: ", "Fuel");
-                                                String output = String.format("Result: %.2f km/L = %.2f L/100km%n",
+                                                String output = String.format("Result: %.2f km/L = %.2f L/100km%nConverted at: %s",
                                                         KM_L,
-                                                        ConverterApp.kmPerLitreToLitresPer100Km(KM_L));
+                                                        ConverterApp.kmPerLitreToLitresPer100Km(KM_L), timestamp());
                                                 IO.println(output);
                                                 addHistory(output);
                                             }
@@ -226,8 +230,8 @@ public class ConsoleUI {
                     new MenuItem("Grade Converter",
                                         () -> {
                                            double score = InputValidator.readPositiveDouble("Enter your score: ", "Score");
-                                            String output = String.format("Your grade: %s",
-                                                          ConverterApp.gradeResult(score));
+                                            String output = String.format("Your grade: %s%nConverted at: %s",
+                                                          ConverterApp.gradeResult(score), timestamp());
                                             IO.println(output);
                                             addHistory(output);
                                         }
@@ -257,9 +261,9 @@ public class ConsoleUI {
     static void printHistory() {
         IO.println("=== Conversion History ===");
         for (int i = 0; i < HISTORY.size(); i++) {
-            IO.print((i+1) + ". " + HISTORY.get(i));
+            IO.print((i+1) + ". " + HISTORY.get(i) + "\n");
         }
-        IO.println("==========================");
+        IO.println("==========================\n");
         IO.println("Total conversions: " + HISTORY.size());
     }
 
@@ -297,6 +301,10 @@ public class ConsoleUI {
 
     static void addHistory(String entry){
         HISTORY.add(entry);
+    }
+
+    static String timestamp() {
+        return LocalDateTime.now().format(FORMATTER);
     }
 }
 
