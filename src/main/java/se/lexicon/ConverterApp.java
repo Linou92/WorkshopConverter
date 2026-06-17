@@ -102,6 +102,19 @@ public class ConverterApp {
         return weight / Math.pow(height, 2);
     }
 
+    static String bmiCategory(double bmi) {
+        if (bmi < 18.5) {
+            return "Underweight";
+        }
+        if (bmi < 25) {
+            return "Normal weight";
+        }
+        if (bmi < 30) {
+            return "Overweight";
+        }
+        return "Obese";
+    }
+
     // fuel consumption functions
     static double litresPer100KnToKmPerLitre(double litresPer100Km) {
         return FUEL_CONSTANT / litresPer100Km;
@@ -109,5 +122,23 @@ public class ConverterApp {
 
     static double kmPerLitreToLitresPer100Km(double kmPerLitre) {
         return FUEL_CONSTANT / kmPerLitre;
+    }
+
+    // grade functions
+    static String gradeResult(double score) {
+       // long roundedScore = Math.round(score);
+        if (score >= 90) {
+            return "Grade A - Excellent";
+        }
+        if (score >= 80) {
+            return "Grade B - Good";
+        }
+        if (score >= 70) {
+            return "Grade C - Pass";
+        }
+        if (score >= 60) {
+            return "Grade D - Below average";
+        }
+        return "Grade F - Fail";
     }
 }

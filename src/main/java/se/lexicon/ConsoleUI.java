@@ -1,333 +1,250 @@
 package se.lexicon;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ConsoleUI {
 
+    static final List<MenuItem> MENU_ITEMS =
+            List.of(
+                    new MenuItem("Currency Converter",
+                            List.of(
+                                    new MenuItem(
+                                            "SEK to USD",
+                                            () -> {
+                                                double sek = InputValidator.readPositiveDouble("Enter amount in SEK: ", "Amount");
+                                                IO.println(String.format("Result: %.2f SEK = %.2f USD%n", sek, ConverterApp.sekToUsd(sek)));
+                                            }
+                                    ),
+                                    new MenuItem(
+                                            "SEK to EUR",
+                                            () -> {
+                                                double sek = InputValidator.readPositiveDouble("Enter amount in SEK: ", "Amount");
+                                                IO.println(String.format("Result: %.2f SEK = %.2f EUR%n", sek, ConverterApp.sekToEur(sek)));
+                                            }
+                                    )
+                            )),
+                    new MenuItem("Temperature Converter",
+                            List.of(
+                                    new MenuItem(
+                                            "Celsius to Fahrenheit",
+                                            () -> {
+                                                double celsius = InputValidator.readDoubleInRange(
+                                                        "Enter temperature in Celsius: ",
+                                                        ConverterApp.ABSOLUTE_ZERO_C,
+                                                        Double.MAX_VALUE,
+                                                        "Invalid value. Temperature cannot be below absolute zero (-273.15 C)."
+                                                );
+                                                IO.println(String.format("Result: %.2f C = %.2f F%n", celsius, ConverterApp.celsiusToFahrenheit(celsius)));
+                                            }
+                                    ),
+                                    new MenuItem(
+                                            "Fahrenheit to Celsius",
+                                            () -> {
+                                                double fahrenheit = InputValidator.readDoubleInRange(
+                                                        "Enter temperature in Fahrenheit: ",
+                                                        ConverterApp.ABSOLUTE_ZERO_F,
+                                                        Double.MAX_VALUE,
+                                                        "Invalid value. Temperature cannot be below absolute zero (-459.67 F)."
+                                                );
+                                                IO.println(String.format("Result: %.2f F = %.2f C%n", fahrenheit, ConverterApp.fahrenheitToCelsius(fahrenheit)));
+                                            }
+                                    )
+                            )),
+                    new MenuItem("Length Converter",
+                            List.of(
+                                    new MenuItem(
+                                            "Centimeters to Meters",
+                                            () -> {
+                                                double cm = InputValidator.readPositiveDouble("Enter length in cm: ", "Length");
+                                                IO.println(String.format("Result: %.2f cm = %.2f m%n",
+                                                        cm,
+                                                        ConverterApp.centimetersToMeters(cm)));
+                                            }
+                                    ),
+                                    new MenuItem(
+                                            "Meters to Kilometers",
+                                            () -> {
+                                                double m = InputValidator.readPositiveDouble("Enter length in m: ", "Length");
+                                                IO.println(String.format("Result: %.2f m = %.2f km%n",
+                                                        m,
+                                                        ConverterApp.metersToKilometers(m)));
+                                            }
+                                    )
+                            )),
+                    new MenuItem("Weight Converter",
+                            List.of(
+                                    new MenuItem(
+                                            "Kilograms to Grams",
+                                            () -> {
+                                                double kg = InputValidator.readPositiveDouble("Enter weight in kg: ", "Weight");
+                                                IO.println(String.format("Result: %.2f kg = %.2f g%n",
+                                                        kg,
+                                                        ConverterApp.kilogramsToGrams(kg)));
+                                            }
+                                    ),
+                                    new MenuItem(
+                                            "Kilograms to Pounds",
+                                            () -> {
+                                                double kg = InputValidator.readPositiveDouble("Enter weight in kg: ", "Weight");
+                                                IO.println(String.format("Result: %.2f kg = %.2f lb%n",
+                                                        kg,
+                                                        ConverterApp.kilogramsToPounds(kg)));
+                                            }
+                                    )
+                            )),
+                    new MenuItem("Time Converter",
+                            List.of(
+                                    new MenuItem(
+                                            "Hours to Minutes",
+                                            () -> {
+                                                double h = InputValidator.readPositiveDouble("Enter time in hours: ", "Time");
+                                                IO.println(String.format("Result: %.2f h = %.2f min%n",
+                                                        h,
+                                                        ConverterApp.hoursToMinutes(h)));
+                                            }
+                                    ),
+                                    new MenuItem(
+                                            "Minutes to Seconds",
+                                            () -> {
+                                                double min = InputValidator.readPositiveDouble("Enter time in min: ", "Time");
+                                                IO.println(String.format("Result: %.2f min = %.2f sec%n",
+                                                        min,
+                                                        ConverterApp.minutesToSeconds(min)));
+                                            }
+                                    )
+                            )),
+                    new MenuItem("Speed Converter",
+                            List.of(
+                                    new MenuItem(
+                                            "km/h to m/s",
+                                            () -> {
+                                                double kmh = InputValidator.readPositiveDouble("Enter speed in km/h: ", "Speed");
+                                                IO.println(String.format("Result: %.2f km/h = %.2f m/s%n",
+                                                        kmh,
+                                                        ConverterApp.kmhToMs(kmh)));
+                                            }
+                                    ),
+                                    new MenuItem(
+                                            "m/s to km/h",
+                                            () -> {
+                                                double ms = InputValidator.readPositiveDouble("Enter speed in m/s: ", "Speed");
+                                                IO.println(String.format("Result: %.2f m/s = %.2f km/h%n",
+                                                        ms,
+                                                        ConverterApp.msToKmh(ms)));
+                                            }
+                                    )
+                            )),
+                    new MenuItem("Data Storage Converter",
+                            List.of(
+                                    new MenuItem(
+                                            "Kilobytes to Megabytes",
+                                            () -> {
+                                                double kb = InputValidator.readPositiveDouble("Enter storage in KB: ", "Storage");
+                                                IO.println(String.format("Result: %.2f KB = %.2f MB%n",
+                                                        kb,
+                                                        ConverterApp.kbToMb(kb)));
+                                            }
+                                    ),
+                                    new MenuItem(
+                                            "Megabytes to Gigabytes",
+                                            () -> {
+                                                double mb = InputValidator.readPositiveDouble("Enter storage in MB: ", "Storage");
+                                                IO.println(String.format("Result: %.2f MB = %.2f GB%n",
+                                                        mb,
+                                                        ConverterApp.mbToGb(mb)));
+                                            }
+                                    )
+                            )),
+                    new MenuItem("BMI Calculator",
+                                        () -> {
+                                            double weight = InputValidator.readPositiveDouble("Enter weight in kg: ", "Weight");
+                                            double height = InputValidator.readPositiveDouble("Enter height in meters: ", "Height");
+                                            double bmi = ConverterApp.calculateBmi(height, weight);
+                                            IO.println(String.format("BMI: %.2f -> %s",
+                                                        bmi,
+                                                        ConverterApp.bmiCategory(bmi)));
+                                            }
+                                    ),
+                    new MenuItem("Fuel Consumption Converter",
+                            List.of(
+                                    new MenuItem(
+                                            "L/100km to km/L",
+                                            () -> {
+                                                double L_KM = InputValidator.readPositiveDouble("Enter fuel in L/100km: ", "Fuel");
+                                                IO.println(String.format("Result: %.2f L/100km = %.2f Km/L%n",
+                                                        L_KM,
+                                                        ConverterApp.litresPer100KnToKmPerLitre(L_KM)));
+                                            }
+                                    ),
+                                    new MenuItem(
+                                            "km/L to L/100km",
+                                            () -> {
+                                                double KM_L = InputValidator.readPositiveDouble("Enter fuel in km/L: ", "Fuel");
+                                                IO.println(String.format("Result: %.2f km/L = %.2f L/100km%n",
+                                                        KM_L,
+                                                        ConverterApp.kmPerLitreToLitresPer100Km(KM_L)));
+                                            }
+                                    )
+                            )),
+                    new MenuItem("Grade Converter",
+                                        () -> {
+                                           double score = InputValidator.readPositiveDouble("Enter your score: ", "Score");
+                                           IO.println(String.format("Your grade: %s",
+                                                          ConverterApp.gradeResult(score)));
+                                        }
+                                    )
+            );
+
     // print the menu
-    static void printMenu() {
-        IO.println("""
-                        ==================================
-                              LEXICON CONVERTER APP
-                        ==================================
-                        1. Currency Converter
-                        2. Temperature Converter
-                        3. Length Converter
-                        4. Weight Converter
-                        5. Time Converter
-                        6. Speed Converter
-                        7. Data Storage Converter
-                        8. BMI Calculator
-                        9. Fuel Consumption Converter
-                        10. Grade Converter
-                        11. Exit
-                        ==================================
-                       """);
-    }
-
-    // currency result
-    public static void currencyConverter() {
+    static void printMenu(List<MenuItem> menu) {
 
         IO.println("""
-            --- Currency Converter ---
-            1. SEK to USD
-            2. SEK to EUR
-            """);
-
-        int choice =
-                InputValidator.readMenuChoice(
-                        "Your choice: ",
-                        1,
-                        2);
-
-        double sek =
-                InputValidator.readPositiveDouble(
-                        "Enter amount in SEK: ", "Amount");
-
-        switch (choice) {
-
-            case 1 ->
-                    System.out.printf(
-                            "Result: %.2f USD%n",
-                            ConverterApp.sekToUsd(sek));
-
-            case 2 ->
-                    System.out.printf(
-                            "Result: %.2f EUR%n",
-                            ConverterApp.sekToEur(sek));
-        }
-    }
-
-    // temperature result
-    static void temperatureConverter() {
-
-        IO.println("""
-                --- Temperature Converter ---
-                Convert:
-                1. Celsius to Fahrenheit
-                2. Fahrenheit to Celsius
+                 ==================================
+                       LEXICON CONVERTER APP
+                 ==================================
                 """);
-
-        int choice = InputValidator.readInt("Your choice: ");
-
-        switch (choice) {
-            case 1 -> {
-                double c =
-                        InputValidator.readDoubleInRange(
-                                "Enter temperature in Celsius: ",
-                                ConverterApp.ABSOLUTE_ZERO_C,
-                                Double.MAX_VALUE,
-                                "Invalid value. Temperature cannot be below absolute zero (-273.15 C)."
-                        );
-                System.out.printf("Result: %.2f C = %.2f F%n",
-                        c,
-                        ConverterApp.celsiusToFahrenheit(c));
-            }
-            case 2 -> {
-                double f =
-                        InputValidator.readDoubleInRange(
-                                "Enter temperature in Fahrenheit: ",
-                                 ConverterApp.ABSOLUTE_ZERO_F,
-                                Double.MAX_VALUE,
-                                "Invalid value. Temperature cannot be below absolute zero (-459.67 F)."
-                        );                System.out.printf("Result: %.2f F = %.2f C%n",
-                        f,
-                        ConverterApp.fahrenheitToCelsius(f));
-            }
-            default -> IO.println("Invalid choice.");
+        for (int i = 0; i < menu.size(); i++) {
+            IO.println((i + 1) + ". " + menu.get(i).getName());
         }
-    }
 
-    // length result
-    static void lengthConverter() {
+        // AUTO-GENERATED EXIT OPTION
+        IO.println((menu.size() + 1) + ". Exit");
 
         IO.println("""
-                --- Length Converter ---
-                Convert:
-                1. Centimeters to Meters
-                2. Meters to Kilometers
+                 ==================================
                 """);
-
-        int choice = InputValidator.readInt("Your choice: ");
-
-        switch (choice) {
-            case 1 -> {
-                double cm = InputValidator.readPositiveDouble("Enter length in cm: ", "Length");
-                System.out.printf("Result: %.2f cm = %.2f m%n",
-                        cm,
-                        ConverterApp.centimetersToMeters(cm));
-            }
-            case 2 -> {
-                double m = InputValidator.readPositiveDouble("Enter length in m: ",  "Length");
-                System.out.printf("Result: %.2f m = %.2f km%n",
-                        m,
-                        ConverterApp.metersToKilometers(m));
-            }
-            default -> IO.println("Invalid choice.");
-        }
     }
 
-    // weight result
-    static void weightConverter() {
+    static void runMenu(List<MenuItem> menu) {
+        printMenu(menu);
+        int choice = InputValidator.readMenuChoice("Choose an option: ", 1, menu.size()+1);
 
-        IO.println("""
-                --- Weight Converter ---
-                Convert:
-                1. Kilograms to Grams
-                2. Kilograms to Pounds
-                """);
-
-        int choice = InputValidator.readInt("Your choice: ");
-        double kg = InputValidator.readPositiveDouble("Enter weight in kg: ", "Weight");
-
-        switch (choice) {
-            case 1 ->
-                    System.out.printf("Result: %.2f kg = %.2f g%n",
-                            kg,
-                            ConverterApp.kilogramsToGrams(kg));
-            case 2 ->
-                    System.out.printf("Result: %.2f kg = %.2f lb%n",
-                            kg,
-                            ConverterApp.kilogramsToPounds(kg));
-            default -> IO.println("Invalid choice.");
+        // EXIT CASE (always last option)
+        if (choice == menu.size() + 1) {
+            IO.println("Goodbye!");
+            System.exit(0);
         }
-    }
 
-    // time result
-    static void timeConverter() {
+        MenuItem selected = menu.get(choice - 1);
 
-        IO.println("""
-                --- Time Converter ---
-                Convert:
-                1. Hours to Minutes
-                2. Minutes to Seconds
-                """);
+        if (selected.hasChildren()) {
+            IO.println("\n--- " + selected.getName() + " ---");
+            IO.println("Convert:");
 
-        int choice = InputValidator.readInt("Your choice: ");
-
-        switch (choice) {
-            case 1 -> {
-                double h = InputValidator.readPositiveDouble("Enter time in hours: ", "Time");
-                System.out.printf("Result: %.2f h = %.2f min%n",
-                        h,
-                        ConverterApp.hoursToMinutes(h));
+            for (int i = 0; i < selected.getChildren().size(); i++) {
+                IO.println((i + 1) + ". " + selected.getChildren().get(i).getName());
             }
-            case 2 -> {
-                double min = InputValidator.readPositiveDouble("Enter time in min: ", "Time");
-                System.out.printf("Result: %.2f min = %.2f sec%n",
-                        min,
-                        ConverterApp.minutesToSeconds(min));
-            }
-            default -> IO.println("Invalid choice.");
-        }
-    }
+            int subChoice =
+                    InputValidator.readMenuChoice(
+                            "Your choice: ",
+                            1,
+                            selected.getChildren().size()+1);
 
-    // speed result
-    static void speedConverter() {
+            MenuItem actionItem = selected.getChildren().get(subChoice - 1);
 
-        IO.println("""
-                --- Speed Converter ---
-                Convert:
-                1. km/h to m/s
-                2. m/s to km/h
-                """);
-
-        int choice = InputValidator.readInt("Your choice: ");
-
-        switch (choice) {
-            case 1 -> {
-                double kmh = InputValidator.readPositiveDouble("Enter speed in km/h: ", "Speed");
-                System.out.printf("Result: %.2f km/h = %.2f m/s%n",
-                        kmh,
-                        ConverterApp.kmhToMs(kmh));
-            }
-            case 2 -> {
-                double ms = InputValidator.readPositiveDouble("Enter speed in m/s: ", "Speed");
-                System.out.printf("Result: %.2f m/s = %.2f km/h%n",
-                        ms,
-                        ConverterApp.msToKmh(ms));
-            }
-            default -> IO.println("Invalid choice.");
-        }
-    }
-
-    // data result
-    static void dataStorageConverter() {
-
-        IO.println("""
-                --- Data Storage Converter ---
-                Convert:
-                1. Kilobytes to Megabytes
-                2. Megabytes to Gigabytes
-                """);
-
-        int choice = InputValidator.readInt("Your choice: ");
-
-        switch (choice) {
-            case 1 -> {
-                double kb = InputValidator.readPositiveDouble("Enter storage in KB: ", "Storage");
-                System.out.printf("Result: %.2f KB = %.2f MB%n",
-                        kb,
-                        ConverterApp.kbToMb(kb));
-            }
-            case 2 -> {
-                double mb = InputValidator.readPositiveDouble("Enter storage in MB: ", "Storage");
-                System.out.printf("Result: %.2f MB = %.2f GB%n",
-                        mb,
-                        ConverterApp.mbToGb(mb));
-            }
-            default -> IO.println("Invalid choice.");
-        }
-    }
-
-    // BMI result
-    private static String bmiCategory (double bmi) {
-        if (bmi < 18.5) {
-            return "Underweight";
-        }
-        if (bmi < 25) {
-            return "Normal weight";
-        }
-        if (bmi < 30) {
-            return "Overweight";
-        }
-        return "Obese";
-    }
-
-    static void bmiCalculator() {
-
-        IO.println("""
-                --- BMI Calculator --- 
-                """);
-
-        double weight = InputValidator.readPositiveDouble("Enter weight in kg: ", "Weight");
-        double height = InputValidator.readPositiveDouble("Enter height in meters: ", "Height");
-        double bmi = ConverterApp.calculateBmi(height, weight);
-
-        IO.println(String.format(
-                "BMI: %.2f -> %s",
-                bmi,
-                bmiCategory(bmi)));
-    }
-
-    // fuel result
-    static void fuelConsumptionConverter() {
-
-        IO.println("""
-                --- Fuel Consumption Converter ---
-                Convert:
-                1. L/100km to km/L
-                2. km/L to L/100km
-                """);
-
-        int choice = InputValidator.readInt("Your choice: ");
-
-        switch (choice) {
-            case 1 -> {
-                double L_KM = InputValidator.readPositiveDouble("Enter fuel in L/100km: ", "Fuel");
-                System.out.printf("Result: %.2f L/100km = %.2f Km/L%n",
-                        L_KM,
-                        ConverterApp.litresPer100KnToKmPerLitre(L_KM));
-            }
-            case 2 -> {
-                double KM_L = InputValidator.readPositiveDouble("Enter fuel in km/L: ", "Fuel");
-                System.out.printf("Result: %.2f km/L = %.2f L/100km%n",
-                        KM_L,
-                        ConverterApp.kmPerLitreToLitresPer100Km(KM_L));
-            }
-            default -> IO.println("Invalid choice.");
-        }
-    }
-
-    // grade result
-    private static String gradeResult (double score) {
-        long roundedScore = Math.round(score);
-        if (roundedScore > 100 || roundedScore < 0) {
-            return "Invalid score";
-        }
-        if (roundedScore >= 90) {
-            return "Grade A - Excellent";
-        }
-        if (roundedScore >= 80) {
-            return "Grade B - Good";
-        }
-        if (roundedScore >= 70) {
-            return "Grade C - Pass";
-        }
-        if (roundedScore >= 60) {
-            return "Grade D - Below average";
-        }
-        return "Grade F - Fail";
-    }
-
-    static void gradeConverter() {
-
-        IO.println("""
-                --- Grade Converter ---
-                """);
-
-        double score = InputValidator.readPositiveDouble("Enter your score: ", "Score");
-
-        IO.println(String.format(
-                "Your grade: %s",
-                gradeResult(score)));
+            actionItem.execute();
+        } else selected.execute();
     }
 }
+
